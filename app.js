@@ -1,16 +1,8 @@
 const inquirer = require('inquirer');
-// const fs = require('fs');
-// const generatePage = require("./src/page-template.js")
+const fs = require('fs');
+const generatePage = require("./src/page-template.js")
+const generateSite = require('./src/utils/generate-site.js');
 
-// const profileDataArgs = process.argv.slice(2);
-
-// const [name, github] = profileDataArgs;
-
-// fs.writeFile('./index.html', generatePage(name, github), err => {
-//   if (err) throw new Error(err);
-
-//   console.log('Portfolio complete! Check out index.html to see the output!');
-// });
 const promptUser = () => {
     return inquirer.prompt([
         {
@@ -40,9 +32,22 @@ const promptUser = () => {
           }
       },
       {
+        type: 'confirm',
+        name: 'confirmAbout',
+        message: 'Would you like to enter some information about yourself for an "About" section?',
+        default: true
+      },
+      {
         type: 'input',
         name: 'about',
-        message: 'Provide some information about yourself:'
+        message: 'Provide some information about yourself:',
+        when: ({ confirmAbout }) => {
+            if (confirmAbout) {
+              return true;
+            } else {
+              return false;
+            }
+          }
       }
     ]);
   };
@@ -125,10 +130,23 @@ const promptProject = portfolioData => {
           })
   }
 
+  
+
   promptUser()
   .then(promptProject)
   .then(portfolioData => {
-    console.log(portfolioData);
+    return generatePage(portfolioData);
+  })
+  .then(pageHTML => {
+    return writeFile(pageHTML);
+  })
+  .then(writeFileResponse => {
+    console.log(writeFileResponse);
+    return copyFile();
+  })
+  .then(copyFileResponse => {
+    console.log(copyFileResponse);
+  })
+  .catch(err => {
+    console.log(err);
   });
-
-  
