@@ -1,0 +1,25 @@
+{
+  "name": "portfolio-generator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bhumisha/portfolio-generator.git"
+  },
+  "keywords": [
+    "portfolio"
+  ],
+  "author": "Bhumisha",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bhumisha/portfolio-generator/issues"
+  },
+  "homepage": "https://github.com/bhumisha/portfolio-generator#readme",
+  "dependencies": {
+    "inquirer": "^7.3.3"
+  }
+}
